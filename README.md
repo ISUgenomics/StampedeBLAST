@@ -1,7 +1,7 @@
 # StampedeBLAST
 ## Running BLAST on local file system: XSEDE-Stampede  
 
-Another alternative is to use `BLAST` running with threads. This approach requires that the input needs to be split into several files. The number of files will be the number of nodes required by the job. This means that if the input file is split into 20 files, 20 nodes will be required by the job. Since having all the nodes accessing the filesystem will create a very high IO load, the database needs to be moved to the local disk of each node. It is also important here to remember that the folder in the parallel filesystem where the database is located needs to have a stripe of at least 60 (see previous section).
+Use this method to run `BLAST` on local file system of Stampede. This approach requires that the input needs to be split into several files. The number of files will be the number of nodes required by the job. This means that if the input file is split into 20 files, 20 nodes will be required by the job. Since having all the nodes accessing the filesystem will create a very high IO load, the database needs to be moved to the local disk of each node. It is also important here to remember that the folder in the parallel filesystem where the database is located needs to have a stripe of at least 60 (see previous section).
 
 Lets say we want to use 10 nodes (10 nodes, 16 cores per node, equals 160 cores). 
 First, split the input file to desired number of splits:

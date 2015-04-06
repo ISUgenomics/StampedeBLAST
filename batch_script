@@ -1,0 +1,48 @@
+#!/bin/bash
+
+##########################################
+##
+## Texas Advanced Computing Center
+## Antonio Gomez (agomez@tacc.utexas.edu)
+## 2015
+##
+##########################################
+
+#SBATCH -J BLAST
+#SBATCH -o BLAST.o%j
+#SBATCH -e BLAST.e%j
+#SBATCH -n blast
+#SBATCH -p normal
+#SBATCH -t 1:00:00
+#SBATCH -A allocation
+
+# ---------
+# Load your modules and initialize your environment here
+# ---------
+module load intel
+module load blast
+
+# ---------
+# Declate Variables
+# ---------
+
+export Shared=/tmp/DATABASE/
+export BLASTDB=/tmp/DATABASE/
+export BLASTMAT=/opt/apps/intel13/mvapich2_1_9/mpiblast/1.6.0/ncbi/data
+export Data=/opt/apps/intel13/mvapich2_1_9/mpiblast/1.6.0/ncbi/data
+export Local=/tmp
+
+# ---------
+# Execute task.sh with ibrun. Make sure that you run:
+# chmod +x task.sh
+# before
+# ---------
+
+time ibrun tacc_affinity sh ./task.sh
+
+# if there are files that need to be put together and those files where copied
+# from each local disk to here (see task.sh):
+
+cat blast_results.* > blast_results_out_10.txt
+rm blast_results.*
+
